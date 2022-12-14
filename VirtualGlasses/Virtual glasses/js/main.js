@@ -10,3 +10,41 @@ let dataGlasses = [
     { id: "G9", src: "./img/g9.jpg", virtualImg: "./img/v9.png", brand: "Coarch", name: "MIDNIGHT VIXEN REMIX", color: "Blue, Black", price: 120, description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit consequatur soluta ad aut laborum amet." }
 ];
 
+
+const renderHTML=(data)=>{
+    let content="";
+    data.forEach((glass) => {
+        content+=`
+        <a href="#" style="display:flex;width:120px;margin-left:25px;margin-bottom:30px" class="glass" onclick="tryGlasses('${glass.virtualImg}','${glass.name}','${glass.brand}','${glass.color}','${glass.price}','${glass.description}')">
+            <img src="${glass.src}" style="width:100%;">
+        </a>`;     
+    
+    });   
+    document.getElementById("vglassesList").innerHTML=content;
+}
+renderHTML(dataGlasses);
+const tryGlasses=(vImage,name,brand,color,price,desc)=>{     
+    let image=`<img class="glassimage" src="${vImage}">`;
+    let text=`
+    <h3>${name}-${brand} (${color})</h3>
+    <p class="price">${price}$</p> <span>Stocking</span>
+    <p>${desc}</p>
+    `;    
+    document.getElementById("avatar").innerHTML=image;
+    document.getElementById("glassesInfo").innerHTML=text;
+    document.getElementById("glassesInfo").style.display="block";
+}
+const removeGlasses=(isRemove)=>{
+    if(isRemove){
+        document.getElementsByClassName("glassimage")[0].style.display="none";
+    }
+    else{
+        document.getElementsByClassName("glassimage")[0].style.display="block";
+    }
+}
+
+window.tryGlasses=tryGlasses;
+window.removeGlasses=removeGlasses;
+
+
+
